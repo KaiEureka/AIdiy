@@ -11,7 +11,7 @@ if not os.path.isdir('.git'):
 
 try:
     # 检查工作区是否有更改（未暂存更改）
-    wt_diff = subprocess.run(['git', 'diff', '--quiet'], check=False)
+    wt_diff = subprocess.run(['git', 'diff', '--no-index', '--quiet'], check=False)
     has_working_changes = wt_diff.returncode != 0
     #has_working_changes = False
 except Exception as e:
