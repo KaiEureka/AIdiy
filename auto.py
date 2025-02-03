@@ -2,8 +2,10 @@ import subprocess
 import os
 
 # 检查当前目录是否为 Git 仓库
+
 target_dir = '/Users/Kai/AIdiy'
 os.chdir(target_dir)
+print("TEST")
 
 if not os.path.isdir('.git'):
     print("脚本内置目标目录不是 Git 仓库，请修改脚本切换到正确的目录。")
@@ -13,10 +15,10 @@ try:
     # 检查工作区是否有更改（未暂存更改）
     wt_diff = subprocess.run(['git', 'diff', '--quiet'], check=False)
     has_working_changes = wt_diff.returncode != 0
-    #has_working_changes = False
+    # has_working_changes = False
 except Exception as e:
     print(f"检查工作区更改时出错: {e}")
-    exit(1)
+    exit(2)
 
 if has_working_changes:
     try:
@@ -30,14 +32,15 @@ if has_working_changes:
         if not error_output:
             error_output = str(e)
         print(f"执行更新操作失败，原因如下: {error_output}")
-        exit(1)
+        exit(3)
 else:
     print("工作区没有新的更改，无需执行 git add。")
 
 try:
     # 检查暂存区是否有需要 commit 的更改
-    index_diff = subprocess.run(['git', 'diff', '--staged', '--quiet'], check=False)
+    index_diff = subprocess.run(['git', 'diff', '--cached', '--quiet'], check=False)
     has_index_changes = index_diff.returncode != 0
+    # has_index_changes = False
 except Exception as e:
     print(f"检查暂存区更改时出错: {e}")
     exit(1)
@@ -56,7 +59,7 @@ if has_index_changes:
         if not error_output:
             error_output = str(e)
         print(f"执行更新操作失败，原因如下: {error_output}")
-        exit(1)
+        exit(4)
 else:
     print("暂存区没有新的更改，无需执行git commit")
     
@@ -66,7 +69,7 @@ try:
     remotes = subprocess.run(['git', 'remote'], capture_output=True, text=True, check=True)
     if 'AIdiy' not in remotes.stdout.splitlines():
         print("远程仓库 'AIdiy' 不存在，请检查配置。")
-        exit(1)
+        exit(5)
 except subprocess.CalledProcessError as e:
     try:
         error_output = e.stderr.decode() if e.stderr else ""
@@ -75,7 +78,7 @@ except subprocess.CalledProcessError as e:
     if not error_output:
         error_output = str(e)
     print(f"执行更新操作失败，原因如下: {error_output}")
-    exit(1)
+    exit(6)
 
 try:
     # 获取当前分支名
