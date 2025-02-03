@@ -54,8 +54,9 @@ if has_index_changes:
         print(f"执行更新操作失败，原因如下: {error_output}")
         exit(1)
 else:
-    print("暂存区没有新的更改，无需提交。")
-
+    print("暂存区没有新的更改，无需执行git commit")
+    
+print("即将开始向远程仓库推送")
 # 检查远程仓库是否存在
 try:
     remotes = subprocess.run(['git', 'remote'], capture_output=True, text=True, check=True)
