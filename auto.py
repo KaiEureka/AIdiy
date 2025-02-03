@@ -89,7 +89,7 @@ try:
 
     if remote_exists:
         # 使用远程分支进行差异比对
-        diff_cmd = ['git', 'diff', '--quiet', 'main']
+        diff_cmd = ['git', 'diff', '--quiet', 'AIdiy/main']
     else:
         # 如果远程分支不存在，直接认为有差异，需新建远程分支
         diff_cmd = None
