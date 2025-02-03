@@ -2,8 +2,10 @@ import subprocess
 import os
 
 # 检查当前目录是否为 Git 仓库
+target_dir = '/Users/Kai/AIdiy'
+os.chdir(target_dir)
 if not os.path.isdir('.git'):
-    print("当前目录不是 Git 仓库，请切换到正确的目录。")
+    print("脚本内置目标目录不是 Git 仓库，请修改脚本切换到正确的目录。")
     exit(1)
 
 try:
