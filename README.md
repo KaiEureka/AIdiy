@@ -1,1 +1,1 @@
-AI自学路上的笔记，用obsidian软件写成，如想预览，克隆后直接用Obsidian打开此软件即可
+AI自学路上的笔记，均为markdown格式
