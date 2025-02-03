@@ -62,7 +62,7 @@ if has_index_changes:
 else:
     print("暂存区没有新的更改，无需执行git commit")
     
-print("即将开始向远程仓库推送")
+# print("即将开始向远程仓库推送")
 # 检查远程仓库是否存在
 try:
     remotes = subprocess.run(['git', 'remote'], capture_output=True, text=True, check=True)
