@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "欢迎.md",
+                "file": "新的起点.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "欢迎"
+              "title": "新的起点"
             }
           }
         ]
@@ -178,12 +178,13 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "46369ab11ab28089",
+  "active": "f003c03f272576bb",
   "lastOpenFiles": [
+    "未命名.md",
+    "新的起点.md",
     "auto.py",
     "未命名.txt",
     "AutoCommit.py",
-    "LICENSE",
-    "欢迎.md"
+    "LICENSE"
   ]
 }
