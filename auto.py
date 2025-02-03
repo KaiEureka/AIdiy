@@ -82,7 +82,7 @@ try:
 
     if is_different:
         try:
-            subprocess.run(['git', 'push', 'AIdiy', 'HEAD:AIdiy/main'], check=True)
+            subprocess.run(['git', 'push'], check=True)
             print("推送成功！")
         except subprocess.CalledProcessError as e:
             error_output = e.stderr.decode() if e.stderr else ""
