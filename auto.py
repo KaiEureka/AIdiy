@@ -89,7 +89,7 @@ try:
 
     if remote_exists:
         # 使用远程分支进行差异比对
-        diff_cmd = ['git', 'diff', '--quiet', 'AIdiy/main']
+        diff_cmd = ['git', 'diff', '--quiet', 'main']
     else:
         # 如果远程分支不存在，直接认为有差异，需新建远程分支
         diff_cmd = None
@@ -116,7 +116,7 @@ try:
             else:
                 print(f"执行更新操作失败，原因如下: {error_output}")
     else:
-        print("本地仓库与远程 AIdiy/main 分支无差异，无需推送。")
+        print("本地仓库与远程main分支无差异，无需推送。")
 
 except subprocess.CalledProcessError as e:
     try:
