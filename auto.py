@@ -1,5 +1,7 @@
 import subprocess
 import os
+import datetime
+print("脚本运行时间:", datetime.datetime.now())
 
 # 检查当前目录是否为 Git 仓库
 
