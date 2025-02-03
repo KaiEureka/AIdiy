@@ -38,7 +38,7 @@ except Exception as e:
     print(f"检查暂存区更改时出错: {e}")
     exit(1)
 
-commit_message = "脚本自动提交"
+commit_message = "AutoCommit"
 
 if has_index_changes:
     try:
@@ -82,14 +82,14 @@ try:
     # 从远程仓库获取最新信息
     subprocess.run(['git', 'fetch', 'AIdiy'], check=True)
 
-    # 检查远程分支 "AIdiy/main" 是否存在
-    lsremote = subprocess.run(['git', 'ls-remote', '--heads', 'AIdiy', 'AIdiy/main'],
+    # 检查远程分支 "main" 是否存在
+    lsremote = subprocess.run(['git', 'ls-remote', '--heads', 'AIdiy', 'main'],
                               capture_output=True, text=True, check=False)
     remote_exists = lsremote.returncode == 0 and lsremote.stdout.strip() != ""
 
     if remote_exists:
         # 使用远程分支进行差异比对
-        diff_cmd = ['git', 'diff', '--quiet', 'AIdiy/AIdiy/main']
+        diff_cmd = ['git', 'diff', '--quiet', 'AIdiy/main']
     else:
         # 如果远程分支不存在，直接认为有差异，需新建远程分支
         diff_cmd = None
