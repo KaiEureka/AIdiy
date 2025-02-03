@@ -19,7 +19,13 @@ if has_working_changes:
         subprocess.run(['git', 'add', '.'], check=True)
         print("工作区有更改，已执行 git add。")
     except subprocess.CalledProcessError as e:
-        print(f"git add 失败: {e}")
+        try:
+            error_output = e.stderr.decode() if e.stderr else ""
+        except Exception:
+            error_output = str(e)
+        if not error_output:
+            error_output = str(e)
+        print(f"执行更新操作失败，原因如下: {error_output}")
         exit(1)
 else:
     print("工作区没有新的更改，无需执行 git add。")
@@ -37,9 +43,15 @@ commit_message = "脚本自动提交"
 if has_index_changes:
     try:
         subprocess.run(['git', 'commit', '-m', commit_message], check=True)
-        print("提交成功。")
+        print("本地提交成功。")
     except subprocess.CalledProcessError as e:
-        print(f"git commit 失败: {e}")
+        try:
+            error_output = e.stderr.decode() if e.stderr else ""
+        except Exception:
+            error_output = str(e)
+        if not error_output:
+            error_output = str(e)
+        print(f"执行更新操作失败，原因如下: {error_output}")
         exit(1)
 else:
     print("暂存区没有新的更改，无需提交。")
@@ -51,7 +63,13 @@ try:
         print("远程仓库 'AIdiy' 不存在，请检查配置。")
         exit(1)
 except subprocess.CalledProcessError as e:
-    print(f"检查远程仓库失败: {e}")
+    try:
+        error_output = e.stderr.decode() if e.stderr else ""
+    except Exception:
+        error_output = str(e)
+    if not error_output:
+        error_output = str(e)
+    print(f"执行更新操作失败，原因如下: {error_output}")
     exit(1)
 
 try:
@@ -85,15 +103,25 @@ try:
             subprocess.run(['git', 'push'], check=True)
             print("推送成功！")
         except subprocess.CalledProcessError as e:
-            error_output = e.stderr.decode() if e.stderr else ""
+            try:
+                error_output = e.stderr.decode() if e.stderr else ""
+            except Exception:
+                error_output = str(e)
+            if not error_output:
+                error_output = str(e)
             if "merge conflict" in error_output.lower() or "conflict" in error_output.lower():
                 print("git push 失败，检测到合并冲突。")
                 print("请手动合并分支解决冲突后再尝试推送。")
             else:
-                print(f"git push 操作失败，原因如下: {error_output}")
+                print(f"执行更新操作失败，原因如下: {error_output}")
     else:
         print("本地仓库与远程 AIdiy/main 分支无差异，无需推送。")
 
 except subprocess.CalledProcessError as e:
-    error_output = e.stderr.decode() if e.stderr else ""
-    print(f"执行本地更新操作失败，原因如下: {error_output}")
+    try:
+        error_output = e.stderr.decode() if e.stderr else ""
+    except Exception:
+        error_output = str(e)
+    if not error_output:
+        error_output = str(e)
+    print(f"执行更新操作失败，原因如下: {error_output}")
