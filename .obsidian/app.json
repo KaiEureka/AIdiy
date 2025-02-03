@@ -1,1 +1,13 @@
-{}
+{
+  "userIgnoreFilters": [
+    "README.md"
+  ],
+  "alwaysUpdateLinks": true,
+  "newLinkFormat": "relative",
+  "showUnsupportedFiles": false,
+  "promptDelete": false,
+  "spellcheck": false,
+  "autoConvertHtml": false,
+  "newFileLocation": "folder",
+  "newFileFolderPath": "工作区"
+}
