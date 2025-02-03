@@ -4,6 +4,7 @@ import os
 # 检查当前目录是否为 Git 仓库
 target_dir = '/Users/Kai/AIdiy'
 os.chdir(target_dir)
+
 if not os.path.isdir('.git'):
     print("脚本内置目标目录不是 Git 仓库，请修改脚本切换到正确的目录。")
     exit(1)
@@ -12,6 +13,7 @@ try:
     # 检查工作区是否有更改（未暂存更改）
     wt_diff = subprocess.run(['git', 'diff', '--quiet'], check=False)
     has_working_changes = wt_diff.returncode != 0
+    #has_working_changes = False
 except Exception as e:
     print(f"检查工作区更改时出错: {e}")
     exit(1)
@@ -34,7 +36,7 @@ else:
 
 try:
     # 检查暂存区是否有需要 commit 的更改
-    index_diff = subprocess.run(['git', 'diff', '--cached', '--quiet'], check=False)
+    index_diff = subprocess.run(['git', 'diff', '--staged', '--quiet'], check=False)
     has_index_changes = index_diff.returncode != 0
 except Exception as e:
     print(f"检查暂存区更改时出错: {e}")
