@@ -5,7 +5,6 @@ import os
 
 target_dir = '/Users/Kai/AIdiy'
 os.chdir(target_dir)
-print("TEST")
 
 if not os.path.isdir('.git'):
     print("脚本内置目标目录不是 Git 仓库，请修改脚本切换到正确的目录。")
@@ -23,7 +22,7 @@ except Exception as e:
 if has_working_changes:
     try:
         subprocess.run(['git', 'add', '.'], check=True)
-        print("工作区有更改，已执行 git add。")
+        print("工作区有更改，已执行 git add.")
     except subprocess.CalledProcessError as e:
         try:
             error_output = e.stderr.decode() if e.stderr else ""
