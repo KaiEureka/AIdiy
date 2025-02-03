@@ -99,7 +99,8 @@ try:
         diff_result = subprocess.run(diff_cmd, check=False)
         is_different = diff_result.returncode != 0
 
-    if is_different:
+    #if is_different:
+    if True:
         try:
             subprocess.run(['git', 'push'], check=True)
             print("推送成功！")
