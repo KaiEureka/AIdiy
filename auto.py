@@ -37,5 +37,11 @@ else:
         subprocess.run(['git', 'push'], check=True)
         print("推送成功！")
     except subprocess.CalledProcessError as e:
-        print(f"git push 失败: {e}")
-        print("请手动合并分支解决冲突后再尝试推送。")
+        # 获取错误输出信息
+        error_output = e.stderr.decode() if e.stderr else ""
+        # 判断是否为合并冲突
+        if "merge conflict" in error_output.lower() or "conflict" in error_output.lower():
+            print("git push 失败，检测到合并冲突。")
+            print("请手动合并分支解决冲突后再尝试推送。")
+        else:
+            print(f"git push 失败，原因如下: {error_output}")
