@@ -1,0 +1,11 @@
+标\*\*表示这个含义在CS领域常用但是对应含义在英文字典中非常靠后甚至不一定出现,因此用一般的翻译软件几乎一定会得到错误的结果
+- argument 实参 **
+- evaluate 求值(值在这里是一个很宽泛的概念, 把lambda表达式求值为一个匿名函数的这个过程也叫求值)**
+- parameter 参数 
+- recurison 递归
+- older 阶**
+- higher older 高阶**
+- Syntax sugar 语法糖
+- literal 字面量** (比如`[1, 2, 3]`就是list literal)
+- pure function 不产生副作用的纯函数, 类似于数学函数, 类似于组合逻辑电路
+- comment 注释**

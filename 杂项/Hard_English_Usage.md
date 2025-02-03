@@ -1,0 +1,2 @@
+-  If you would rather not use that code, feel free to delete it and start from scratch.
+- refer back here should you get stuck.
