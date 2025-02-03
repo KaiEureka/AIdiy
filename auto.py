@@ -44,6 +44,16 @@ if has_index_changes:
 else:
     print("暂存区没有新的更改，无需提交。")
 
+# 检查远程仓库是否存在
+try:
+    remotes = subprocess.run(['git', 'remote'], capture_output=True, text=True, check=True)
+    if 'AIdiy' not in remotes.stdout.splitlines():
+        print("远程仓库 'AIdiy' 不存在，请检查配置。")
+        exit(1)
+except subprocess.CalledProcessError as e:
+    print(f"检查远程仓库失败: {e}")
+    exit(1)
+
 try:
     # 获取当前分支名
     branch_result = subprocess.run(['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
@@ -51,15 +61,28 @@ try:
     current_branch = branch_result.stdout.strip()
 
     # 从远程仓库获取最新信息
-    subprocess.run(['git', 'fetch'], check=True)
+    subprocess.run(['git', 'fetch', 'AIdiy'], check=True)
 
-    # 比较当前分支与远程 AIdiy 分支是否有差异
-    diff_result = subprocess.run(['git', 'diff', '--quiet', 'origin/AIdiy'], check=False)
-    is_different = diff_result.returncode != 0
+    # 检查远程分支 "AIdiy/main" 是否存在
+    lsremote = subprocess.run(['git', 'ls-remote', '--heads', 'AIdiy', 'AIdiy/main'],
+                              capture_output=True, text=True, check=False)
+    remote_exists = lsremote.returncode == 0 and lsremote.stdout.strip() != ""
+
+    if remote_exists:
+        # 使用远程分支进行差异比对
+        diff_cmd = ['git', 'diff', '--quiet', 'AIdiy/AIdiy/main']
+    else:
+        # 如果远程分支不存在，直接认为有差异，需新建远程分支
+        diff_cmd = None
+
+    is_different = True
+    if diff_cmd:
+        diff_result = subprocess.run(diff_cmd, check=False)
+        is_different = diff_result.returncode != 0
 
     if is_different:
         try:
-            subprocess.run(['git', 'push', 'origin', f'HEAD:AIdiy'], check=True)
+            subprocess.run(['git', 'push', 'AIdiy', 'HEAD:AIdiy/main'], check=True)
             print("推送成功！")
         except subprocess.CalledProcessError as e:
             error_output = e.stderr.decode() if e.stderr else ""
@@ -69,7 +92,7 @@ try:
             else:
                 print(f"git push 操作失败，原因如下: {error_output}")
     else:
-        print("本地仓库与远程 AIdiy 分支无差异，无需推送。")
+        print("本地仓库与远程 AIdiy/main 分支无差异，无需推送。")
 
 except subprocess.CalledProcessError as e:
     error_output = e.stderr.decode() if e.stderr else ""
