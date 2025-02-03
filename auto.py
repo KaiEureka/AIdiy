@@ -82,43 +82,21 @@ try:
     # 从远程仓库获取最新信息
     subprocess.run(['git', 'fetch', 'AIdiy'], check=True)
 
-    # 检查远程分支 "main" 是否存在
-    lsremote = subprocess.run(['git', 'ls-remote', '--heads', 'AIdiy', 'main'],
-                              capture_output=True, text=True, check=False)
-    remote_exists = lsremote.returncode == 0 and lsremote.stdout.strip() != ""
-
-    if remote_exists:
-        # 使用远程分支进行差异比对
-        diff_cmd = ['git', 'diff', '--quiet', 'AIdiy/main']
-    else:
-        # 如果远程分支不存在，直接认为有差异，需新建远程分支
-        diff_cmd = None
-
-    is_different = True
-    if diff_cmd:
-        diff_result = subprocess.run(diff_cmd, check=False)
-        is_different = diff_result.returncode != 0
-
-    #if is_different:
-    if True:
+    try:
+        subprocess.run(['git', 'push'], check=True)
+        print("推送成功！")
+    except subprocess.CalledProcessError as e:
         try:
-            subprocess.run(['git', 'push'], check=True)
-            print("推送成功！")
-        except subprocess.CalledProcessError as e:
-            try:
-                error_output = e.stderr.decode() if e.stderr else ""
-            except Exception:
-                error_output = str(e)
-            if not error_output:
-                error_output = str(e)
-            if "merge conflict" in error_output.lower() or "conflict" in error_output.lower():
-                print("git push 失败，检测到合并冲突。")
-                print("请手动合并分支解决冲突后再尝试推送。")
-            else:
-                print(f"执行更新操作失败，原因如下: {error_output}")
-    else:
-        print("本地仓库与远程main分支无差异，无需推送。")
-
+            error_output = e.stderr.decode() if e.stderr else ""
+        except Exception:
+            error_output = str(e)
+        if not error_output:
+            error_output = str(e)
+        if "merge conflict" in error_output.lower() or "conflict" in error_output.lower():
+            print("git push 失败，检测到合并冲突。")
+            print("请手动合并分支解决冲突后再尝试推送。")
+        else:
+            print(f"执行更新操作失败，原因如下: {error_output}")
 except subprocess.CalledProcessError as e:
     try:
         error_output = e.stderr.decode() if e.stderr else ""
