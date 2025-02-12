@@ -20,7 +20,14 @@
 15. [[Lecture 16&17 iterator, 生成器yield, IO]]
 16. [[Lecture 18&19&20 OOP]]
 17. [[Lecture 21 repr, str, __method__, 类型分派]]
-18. 
+18. [[Lecture 28 Scheme]]
+19. 
+
+
+## 跳跃的内容
+
+Proj 3
+Lecture 29
 
 
 
