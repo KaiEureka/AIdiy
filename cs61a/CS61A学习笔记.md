@@ -2,6 +2,9 @@
 
 网址 https://cs61a.org/
 
+## 目前进度： Lecture 30
+
+
 ## 学习笔记
 1. [[lab00 first lab]]
 2. [[HW01 basic_grammer]]
