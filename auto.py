@@ -1,13 +1,14 @@
 import subprocess
 import os
 import datetime
+
 print("脚本运行时间:", datetime.datetime.now())
 
-# 检查当前目录是否为 Git 仓库
-
-target_dir = '/Users/Kai/AIdiy'
+# 获取当前脚本所在的目录
+target_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(target_dir)
 
+# 检查当前目录是否为 Git 仓库
 if not os.path.isdir('.git'):
     print("脚本内置目标目录不是 Git 仓库，请修改脚本切换到正确的目录。")
     exit(1)
@@ -63,7 +64,7 @@ if has_index_changes:
         exit(4)
 else:
     print("暂存区没有新的更改，无需执行git commit")
-    
+
 # print("即将开始向远程仓库推送")
 # 检查远程仓库是否存在
 try:
