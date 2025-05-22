@@ -1,4 +1,4 @@
-
+# 欧拉函数与欧拉反演(SigmaGCD)
 ## 定义
 
 欧拉函数（Euler's totient function），即 $\varphi(n)$，表示的是小于等于 $n$ 和 $n$ 互质的数的个数。
@@ -37,8 +37,6 @@ int euler_phi(int n) {
 
 如果是多个数的欧拉函数值，可以利用线性筛法来求得。
 
-详见：[筛法求欧拉函数](筛.md#筛法求欧拉函数)
-
 ## 应用
 
 欧拉函数常常用于化简一列最大公约数的和。国内有些文章称它为 **欧拉反演**[^1]。
@@ -55,7 +53,9 @@ $$
 \gcd(a,b) = \sum_{d|\gcd(a,b)}\varphi(d) = \sum_d [d|a][d|b]\varphi(d),
 $$
 
-其中，$[\cdot]$ 称为 [Iverson 括号](https://mathworld.wolfram.com/IversonBracket.html)，只有当命题 $P$ 为真时 $[P]$ 取值为 $1$，否则取 $0$。对上式求和，就可以得到
+其中，$[\cdot]$ 称为 [Iverson 括号](https://mathworld.wolfram.com/IversonBracket.html)，只有当命题 $P$ 为真时 $[P]$ 取值为 $1$，否则取 $0$。
+
+对上式求和，就可以得到
 
 $$
 \sum_{i=1}^n\gcd(i,n)=\sum_{d}\sum_{i=1}^n[d|i][d|n]\varphi(d)=\sum_d\left\lfloor\frac{n}{d}\right\rfloor[d|n]\varphi(d)=\sum_{d|n}\left\lfloor\frac{n}{d}\right\rfloor\varphi(d).

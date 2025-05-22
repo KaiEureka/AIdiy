@@ -1,3 +1,4 @@
+# Min_25筛
 从此种筛法的思想方法来说，其又被称为扩展埃氏筛。但由于其由 [Min\_25](http://min-25.hatenablog.com/) 发明并最早开始使用，故称「Min\_25 筛」。
 
 其可以在 $O\left(\frac{n^{\frac{3}{4}}}{\log{n}}\right)$ 或 $\Theta\left(n^{1 - \epsilon}\right)$ 的时间复杂度下解决一类 **积性函数** 的前缀和问题。

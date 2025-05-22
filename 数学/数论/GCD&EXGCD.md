@@ -1,3 +1,4 @@
+# GCD&EXGCD
 ## GCD
 ### 迭代写法
 ```cpp
@@ -11,10 +12,74 @@ int gcd(int a, int b) {
 }
 ```
 
-
 对于 C++17，我们可以使用 [`<numeric>`](https://en.cppreference.com/w/cpp/header/numeric) 头中的 [`std::gcd`](https://en.cppreference.com/w/cpp/numeric/gcd) 与 [`std::lcm`](https://en.cppreference.com/w/cpp/numeric/lcm) 来求最大公约数和最小公倍数。
 
 要求多个数的gcd， 由于gcd满足$gcd(a, b, c) = gcd(a, gcd(b, c))$ ,依次求解即可
+
+### O(1)GCD
+下面这个做法，可以实现O(值域)的预处理，O(1)的查询。
+
+```cpp
+#include <iostream>
+using namespace std;
+
+const int Mod = 998244353;
+
+namespace GCD
+{
+    const int V = 1e6, T = 1e3; // T = sqrt(V)
+    int pre[T + 5][T + 5];
+    array<int, 3> fac[V + 5];
+    bool isnp[V + 5];
+    int p[V + 5], tot = 0;
+    int TT;
+    void init(const int v = V)
+    {
+        fac[1] = {1, 1, 1};
+        for (int i = 2; i <= v; i++)
+        {
+            if (!isnp[i])
+                fac[i] = {i, 1, 1}, p[tot++] = i;
+            for (int j = 0; j < tot && i * p[j] <= v; j++)
+            {
+                int t = i * p[j];
+                isnp[t] = true;
+                fac[t] = fac[i], *min_element(fac[t].begin(), fac[t].end()) *= p[j];
+                if (i % p[j] == 0)
+                    break;
+            }
+        }
+        TT = sqrt(v);
+        for (int i = 1; i <= TT; i++)
+            pre[0][i] = pre[i][0] = i;
+        for (int i = 1; i <= TT; i++)
+            for (int j = 1; j <= i; j++)
+                pre[i][j] = pre[j][i] = pre[j][i % j];
+    }
+    int g(int x, int y)
+    {
+        int t = x % y;
+        if (t == 0)
+            return y;
+        return y > TT ? 1 : pre[y][t];
+    }
+    int gcd(int a, int b)
+    {
+        if (a == 1 || b == 1)
+            return 1;
+        int a0 = g(a, fac[b][0]), a1 = g(a /= a0, fac[b][1]), a2 = g(a /= a1, fac[b][2]);
+        return a0 * a1 * a2;
+    }
+}
+
+int main()
+{
+    GCD::init();
+    cin >> a >> b;
+    cout << GCD::gcd(a, b) << endl;
+    return 0;
+}
+```
 
 ## LCM
 

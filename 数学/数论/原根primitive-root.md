@@ -1,3 +1,4 @@
+# 原根primitive-root
 
 阶和原根是定义 [离散对数](离散对数.md) 的关键工具。其在抽象代数中的推广可参见 [群论](../抽象代数/group-theory.md#阶) 和 [环论](../抽象代数/ring-theory.md#应用整数同余类的乘法群) 的相关章节。
 
@@ -7,29 +8,23 @@
 由欧拉定理可知，对 $a\in \mathbf{Z}$，$m\in\mathbf{N}^{*}$，若 $(a,m)=1$，则 $a^{\varphi(m)}\equiv 1\pmod m$.
 
 因此满足同余式 $a^n \equiv 1 \pmod m$ 的最小正整数 $n$ 存在，这个 $n$ 称作 $a$ 模 $m$ 的阶，记作 $\delta_m(a)$ 或 $\operatorname{ord}_m(a)$.
-
 ### 性质 1
 
 $a,a^2,\cdots,a^{\delta_m(a)}$ 模 $m$ 两两不同余。
-
 ### 性质 2
 
 若 $a^n \equiv 1 \pmod m$，则 $\delta_m(a)\mid n$.
-
 ### 性质 3
 
 设 $m\in\mathbf{N}^{*}$，$a,b\in\mathbf{Z}$，$(a,m)=(b,m)=1$，则
-
 $$
 \delta_m(ab)=\delta_m(a)\delta_m(b)
 $$
-
 的充分必要条件是
 
 $$
 \left(\delta_m(a), \delta_m(b)\right)=1
 $$
-
 ### 性质 4
 
 设 $k \in \mathbf{N}$，$m\in \mathbf{N}^{*}$，$a\in\mathbf{Z}$，$(a,m)=1$，则
@@ -37,7 +32,6 @@ $$
 $$
 \delta_m(a^k)=\dfrac{\delta_m(a)}{\left(\delta_m(a),k\right)}
 $$
-
 ## 原根
 
 ### 定义
@@ -62,15 +56,6 @@ $$
 若一个数 $m$ 有原根 $g$，那么对于任意 $\varphi(m)$ 的因子 $d$，模 $m$ 的 $d$ 阶元素存在且个数为 $\varphi(d)$。
 
 特别地，$m$ 的原根个数为 $\varphi(\varphi(m))$。
-
-???+ note "证明"
-设 $d'=\dfrac{\varphi(m)}{d}$，由阶的性质有 $\delta_m(g^{d'})=\dfrac{\delta_m(g)}{(\delta_m(g),d')}=d$。因此模 $m$ 的 $d$ 阶元素存在。
-
-设 $a=g^{d'}$，$k$ 是不大于 $d$ 的整数。由阶的性质有 $a,a^2,\ldots,a^d$ 互不相同，且 $\delta_m(a^k)=\dfrac{\delta_m(a)}{(\delta_m(a),k)}=\dfrac{d}{(d,k)}$。
-
-当且仅当 $(d,k)=1$ 时 $\delta_m(a^k)=d$。这样的 $k$ 有 $\varphi(d)$ 个。所以模 $m$ 的 $d$ 阶元素至少有 $\varphi(d)$ 个。
-
-由于 $\varphi(m)=\sum_{d\mid \varphi(m)}\varphi(d)$，因此模 $m$ 的 $d$ 阶元素恰有 $\varphi(d)$ 个。
 
 ### 原根存在定理
 

@@ -1,4 +1,4 @@
-
+# 中国剩余定理 CRT
 ## 定义
 
 中国剩余定理 (Chinese Remainder Theorem, CRT) 可求解如下形式的一元线性同余方程组（其中 $n_1, n_2, \cdots, n_k$ 两两互质）：
